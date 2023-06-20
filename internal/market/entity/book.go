@@ -1,3 +1,8 @@
+/**
+ * @author: rayoneitalo & rickybustillos
+ * @co-author: wesleywillians
+ * @description: Book responsible to register matched transactions
+ */
 package entity
 
 import (
@@ -31,7 +36,8 @@ func (book *Book) Trade() {
 	heap.Init(sellOrders)
 
 	for order := range book.OrdersChannel {
-		if order.OrderType == "BUY" {
+
+		if order.OrderType == BUY {
 
 			heap.Push(buyOrders, order)
 
@@ -59,7 +65,7 @@ func (book *Book) Trade() {
 					}
 				}
 			}
-		} else if order.OrderType == "SELL" {
+		} else if order.OrderType == SELL {
 
 			sellOrders.Push(order)
 
