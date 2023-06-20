@@ -1,5 +1,20 @@
 package entity
 
+type OrderType string
+
+const (
+	BUY  OrderType = "BUY"
+	SELL OrderType = "SELL"
+)
+
+type OrderStatus string
+
+const (
+	OPEN    OrderStatus = "OPEN"
+	PENDING OrderStatus = "PENDING"
+	CLOSED  OrderStatus = "CLOSED"
+)
+
 type Order struct {
 	ID            string
 	Investor      *Investor
@@ -7,8 +22,8 @@ type Order struct {
 	Shares        int
 	PendingShares int
 	Price         float64
-	OrderType     string
-	Status        string
+	OrderType     OrderType
+	Status        OrderStatus
 	Transactions  []*Transaction
 }
 
@@ -18,7 +33,7 @@ func NewOrder(
 	asset *Asset,
 	shares int,
 	price float64,
-	orderType string,
+	orderType OrderType,
 ) *Order {
 	return &Order{
 		ID:            id,
@@ -28,7 +43,7 @@ func NewOrder(
 		PendingShares: shares,
 		Price:         price,
 		OrderType:     orderType,
-		Status:        "OPEN",
+		Status:        OPEN,
 		Transactions:  []*Transaction{},
 	}
 }
